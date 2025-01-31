@@ -16,13 +16,23 @@ export function Post(){
             <div className={styles.conteudo}>
             <p className={styles.p}>Fala galeraa 👋</p>
             <p className={styles.p}>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-            <p className={styles.p}><a href="">jane.design/doctorcare</a></p>
             <p className={styles.p}>
-                <a className={styles.teste} href="">#novoprojeto</a>{' '}
+                <a className={styles.a} href="">jane.design/doctorcare</a></p>
+            <p className={styles.p}>
+                <a className={styles.a} href="">#novoprojeto</a>{' '}
                 <a className={styles.a} href="">#nlw</a>{' '} 
-                <a href="">#rocketseat</a>{' '}
+                <a className={styles.a} href="">#rocketseat</a>{' '}
                 </p>
-            </div>                
+            </div> 
+            <form className={styles.commentForm}>
+                <strong>Deixe seu feedback</strong>
+                <textarea
+                    placeholder='deixe um comentario'
+                />
+                <footer>
+                    <button type='submit'>Publicar</button>
+                </footer>
+            </form>               
         </article>
     );
     
