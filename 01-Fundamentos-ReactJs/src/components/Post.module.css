@@ -14,17 +14,17 @@
     margin-top: 1.5rem;
 }
 
-.p {
+.content p {
     margin-top: 1rem;
 }
 
-.a {
+.content a {
     font-weight: bold;
     color: var(--green-500) !important;
     text-decoration: none;
 }
 
-.a:hover {
+.content a:hover {
     color: var(--green-300)!important;
 }
 
