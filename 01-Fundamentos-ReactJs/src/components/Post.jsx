@@ -3,8 +3,15 @@ import ptBR from 'date-fns/locale/pt-BR'
 import styles from './Post.module.css'
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
+import { useState } from 'react';
 
 export function Post({ author, publishedAt, content }) {
+    const [comments, setComments] = useState([
+        'Post muito bacana, hein?!'
+    ]);
+
+    const [newCommentText, setNewCommentText] = useState('');
+
     const publisehdDateFormatter = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", {
         locale: ptBR,
     })
@@ -13,6 +20,15 @@ export function Post({ author, publishedAt, content }) {
         locale: ptBR,
         addSuffix: true,
     })
+
+    function handleCrateNewComment() {
+        event.preventDefault()
+        setComments([...comments, newCommentText]);
+        setNewCommentText('');
+    }
+    function handleNewCommentChange() {
+        setNewCommentText(event.target.value);
+    }
 
     return (
         <article className={styles.post}>
@@ -37,19 +53,23 @@ export function Post({ author, publishedAt, content }) {
                     }
                 })}
             </div>
-            <form className={styles.commentForm}>
+            <form onSubmit={handleCrateNewComment} className={
+                styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
                 <textarea
-                    placeholder='deixe um comentario'
+                    name="comment"
+                    placeholder="Deixe um comentário"
+                    value={newCommentText}
+                    onChange={handleNewCommentChange}
                 />
                 <footer>
                     <button type='submit'>Publicar</button>
                 </footer>
             </form>
             <div className={styles.commentList}>
-                <Comment />
-                <Comment />
-                <Comment />
+                {comments.map(comment => {
+                    return <Comment content={comment} />
+                })}
             </div>
         </article>
     );
