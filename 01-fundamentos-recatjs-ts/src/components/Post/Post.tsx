@@ -1,32 +1,12 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
 import styles from './Post.module.css'
-import { Comment } from './Comment';
-import { Avatar } from './Avatar';
+import { Comment } from '../Comment/Comment';
+import { Avatar } from '../Avatar/Avatar';
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
+import { IPostProps } from './IPost';
 
-interface Author {
-    name: string;
-    role: string;
-    avatarUrl: string;
-}
-
-export interface PostType {
-    id: number;
-    author: Author;
-    publishedAt: Date;
-    content: Content[];
-}
-
-interface PostProps {
-    post: PostType
-}
-
-interface Content {
-    content: 'paragraph' | 'link'
-}
-
-export function Post({ post }: PostProps) {
+export function Post({ post }: IPostProps) {
     const [comments, setComments] = useState([
         'Post muito bacana, hein?!'
     ]);
@@ -81,10 +61,10 @@ export function Post({ post }: PostProps) {
             </header>
             <div className={styles.content}>
                 {post.content.map(Line => {
-                    if (Line.content === 'paragraph') {
+                    if (Line.type === 'paragraph') {
                         return <p key={Line.content}>{Line.content}</p>
-                    } else if (Line.content === 'link') {
-                        return <p key={Line.content}><a href="#">{Line.content}</a></p>
+                    } else if (Line.type === 'link') {
+                        return <p key={Line.content}><a href={Line.url}>{Line.content}</a></p>
                     }
                 })}
             </div>
